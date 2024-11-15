@@ -25,7 +25,7 @@ export default function Login() {
 
   return (
     <div className="max-w-5xl mx-auto px-6 flex flex-col justify-center items-center min-h-screen">
-      <Heading>Connectez-vous</Heading>
+      <Heading className="mb-8">Connectez-vous</Heading>
       <Input
         className="mb-4"
         value={prenom}

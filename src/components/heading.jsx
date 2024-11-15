@@ -1,6 +1,8 @@
-export function Heading({ children }) {
+export function Heading({ className, children }) {
   return (
-    <h1 className="text-3xl font-bold leading-tight tracking-tighter md:text-4xl lg:leading-[1.1] text-center pb-10 pt-2">
+    <h1
+      className={`text-3xl font-bold tracking-tighter md:text-4xl text-center ${className}`}
+    >
       {children}
     </h1>
   );

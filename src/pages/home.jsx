@@ -1,13 +1,24 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { Heading } from "../components/heading";
 import { Post } from "../components/post";
 import { fetchPosts } from "../actions/post-actions";
+import { Spinner } from "../components/spinner";
 
 export default function Home() {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  function logout() {
+    dispatch({
+      type: "LOGOUT",
+    });
+
+    navigate("/login");
+  }
 
   useEffect(() => {
     dispatch(fetchPosts());
@@ -15,10 +26,16 @@ export default function Home() {
 
   return (
     <div className="max-w-5xl mx-auto px-6 pt-8">
-      <Heading>Bienvenue {state.user.prenom}</Heading>
+      <div className="flex items-center justify-center pb-10 gap-8">
+        <Heading>Bienvenue {state.user.prenom}</Heading>
+
+        <button className="text-sm font-medium underline" onClick={logout}>
+          Logout
+        </button>
+      </div>
 
       {state.post.loading == true ? (
-        <p>Loading...</p>
+        <Spinner />
       ) : state.post.error ? (
         <p>{state.post.error}</p>
       ) : (

@@ -27,6 +27,25 @@ export default function postReducer(state = initialState, action) {
         error: action.payload,
       };
 
+    case "LIKE_POST":
+      const { id, username } = action.payload;
+
+      return {
+        ...state,
+        posts: state.posts.map((post) => {
+          if (post.id == id) {
+            return {
+              ...post,
+              likes: post.likes.includes(username)
+                ? post.likes.filter((u) => u !== username)
+                : [...post.likes, username],
+            };
+          } else {
+            return post;
+          }
+        }),
+      };
+
     default:
       return state;
   }
